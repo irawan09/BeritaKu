@@ -1,1 +1,1 @@
-"# BeritaKu" 
+# BeritaKu
