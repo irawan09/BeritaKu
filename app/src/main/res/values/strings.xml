@@ -3,6 +3,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="newsFragment">NewsFragment</string>
-    <string name="savedFragment">savedFragment</string>
+    <string name="savedFragment">SavedFragment</string>
     <string name="infoFragment">InfoFragment</string>
 </resources>
