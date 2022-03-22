@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BeritaKu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="newsFragment">NewsFragment</string>
+    <string name="savedFragment">savedFragment</string>
+    <string name="infoFragment">InfoFragment</string>
 </resources>
