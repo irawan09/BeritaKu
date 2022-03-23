@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
+import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
 import irawan.electroshock.beritaku.presentation.viewmodel.NewsViewModelFactory
 import javax.inject.Singleton
 
@@ -17,9 +18,10 @@ class FactoryModule {
     @Singleton
     fun provideNewsViewModelFactory(
         application: Application,
-        getNewsHeadlinesUseCase : GetNewsHeadlinesUseCase
+        getNewsHeadlinesUseCase : GetNewsHeadlinesUseCase,
+        getSearchedNewsUseCase : GetSearchedNewsUseCase
     ): NewsViewModelFactory {
-        return NewsViewModelFactory(application, getNewsHeadlinesUseCase)
+        return NewsViewModelFactory(application, getNewsHeadlinesUseCase, getSearchedNewsUseCase)
     }
 
 }

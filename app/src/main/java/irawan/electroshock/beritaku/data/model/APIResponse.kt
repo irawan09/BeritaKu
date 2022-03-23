@@ -7,8 +7,8 @@ data class APIResponse(
     val articles: List<Article>,
 
     @SerializedName("status")
-    val status: String,
+    val status: String? = "N/A" ?: "None",
 
     @SerializedName("totalResults")
-    val totalResults: Int
+    val totalResults: Int? = 0 ?: 0
 )

@@ -11,15 +11,18 @@ import androidx.lifecycle.viewModelScope
 import irawan.electroshock.beritaku.data.model.APIResponse
 import irawan.electroshock.beritaku.data.util.Resource
 import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
+import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class NewsViewModel(
     private val app: Application,
-    val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
     ): AndroidViewModel(app) {
     val newsHeadlines : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
+    val searchedNews : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
 
     fun getNewsHeadlines(country: String, page: Int) = viewModelScope.launch(Dispatchers.IO) {
         newsHeadlines.postValue(Resource.Loading())
@@ -63,4 +66,23 @@ class NewsViewModel(
         return false
 
     }
+
+    fun searchedNews(
+        country: String,
+        searchedQuery: String,
+        page: Int
+    ) = viewModelScope.launch{
+        searchedNews.postValue(Resource.Loading())
+        try {
+            if (isNetworkAvailable(app)) {
+                val response = getSearchedNewsUseCase.execute(country, searchedQuery, page)
+            } else {
+                searchedNews.postValue(Resource.Error("Data No Internet Connection"))
+            }
+        } catch (e: Exception){
+            searchedNews.postValue(Resource.Error("${e.message}"))
+        }
+    }
+
+
 }

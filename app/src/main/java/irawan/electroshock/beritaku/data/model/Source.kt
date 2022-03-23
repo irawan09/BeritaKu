@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Source(
     @SerializedName("id")
-    val id: String,
+    val id: String? = "N/A" ?: "None",
 
     @SerializedName("name")
-    val name: String
+    val name: String? = "N/A" ?: "None"
 )

@@ -29,7 +29,7 @@ class InfoFragment : Fragment() {
         fragmentInfoBinding.wvInfo.apply {
             webViewClient = WebViewClient()
             if(article.url!=""){
-                loadUrl(article.url)
+                article.url?.let { loadUrl(it) }
             } else{
                 throw Exception("Your URL is empty")
             }

@@ -5,26 +5,26 @@ import java.io.Serializable
 
 data class Article(
     @SerializedName("author")
-    val author: String,
+    val author: String? = "N/A" ?: "None",
 
     @SerializedName("content")
-    val content: String,
+    val content: String? = "N/A" ?: "None",
 
     @SerializedName("description")
-    val description: String,
+    val description: String? = "N/A" ?: "None",
 
     @SerializedName("publishedAt")
-    val publishedAt: String,
+    val publishedAt: String? = "N/A" ?: "None",
 
     @SerializedName("source")
-    val source: Source,
+    val source: Source?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String? = "N/A" ?: "None",
 
     @SerializedName("url")
-    val url: String,
+    val url: String? = "N/A" ?: "None",
 
     @SerializedName("urlToImage")
-    val urlToImage: String
+    val urlToImage: String? = "N/A" ?: "None"
 ):Serializable
