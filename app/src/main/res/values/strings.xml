@@ -5,4 +5,6 @@
     <string name="newsFragment">NewsFragment</string>
     <string name="savedFragment">SavedFragment</string>
     <string name="infoFragment">InfoFragment</string>
+    <string name="Image">Image</string>
+    <string name="description">DESCRIPTION</string>
 </resources>
