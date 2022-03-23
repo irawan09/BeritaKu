@@ -48,8 +48,6 @@ class NewsFragment : Fragment() {
             val bundle = Bundle().apply {
                 putSerializable("selected_article", it)
             }
-            Log.i(TAG, bundle.getSerializable("selected_article").toString())
-//            if(bundle)
             findNavController().navigate(
                 R.id.action_newsFragment_to_infoFragment,
                 bundle
@@ -62,6 +60,7 @@ class NewsFragment : Fragment() {
 
     private fun viewNewsList() {
         viewModel.getNewsHeadlines(country, page)
+        Log.i(TAG, viewLifecycleOwner.lifecycle.currentState.name)
         viewModel.newsHeadlines.observe(viewLifecycleOwner, { response ->
             when(response){
                 is Resource.Success -> {
@@ -193,6 +192,4 @@ class NewsFragment : Fragment() {
 
         })
     }
-
-
 }
