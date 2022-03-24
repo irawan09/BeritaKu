@@ -76,6 +76,7 @@ class NewsViewModel(
         try {
             if (isNetworkAvailable(app)) {
                 val response = getSearchedNewsUseCase.execute(country, searchedQuery, page)
+                searchedNews.postValue(response)
             } else {
                 searchedNews.postValue(Resource.Error("Data No Internet Connection"))
             }

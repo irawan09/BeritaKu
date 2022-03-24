@@ -1,6 +1,5 @@
 package irawan.electroshock.beritaku.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -47,7 +46,7 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
             binding.tvPublishedAt.text = article.publishedAt
-            binding.tvSource.text = article.source?.name ?: "null"
+            binding.tvSource.text = article.source?.name
 
             Glide.with(binding.ivArticleImage.context)
                 .load(article.urlToImage)
