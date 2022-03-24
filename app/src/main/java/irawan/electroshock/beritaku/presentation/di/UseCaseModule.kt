@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import irawan.electroshock.beritaku.domain.repository.NewsRepository
 import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
 import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
+import irawan.electroshock.beritaku.domain.usecase.SaveNewsUseCase
 import javax.inject.Singleton
 
 @Module
@@ -27,6 +28,14 @@ class UseCaseModule {
         newsRepository: NewsRepository
     ): GetSearchedNewsUseCase {
         return GetSearchedNewsUseCase(newsRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveNewsUseCase(
+        newsRepository: NewsRepository
+    ): SaveNewsUseCase{
+        return SaveNewsUseCase(newsRepository)
     }
 
 }

@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import irawan.electroshock.beritaku.data.repository.NewsRepositoryImpl
+import irawan.electroshock.beritaku.data.repository.dataSource.NewsLocalDataSource
 import irawan.electroshock.beritaku.data.repository.dataSource.NewsRemoteDataSource
 import irawan.electroshock.beritaku.data.repository.dataSourceImpl.NewsRemoteDataSourceImpl
 import irawan.electroshock.beritaku.domain.repository.NewsRepository
@@ -16,7 +17,12 @@ class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(newsRemoteDataSource: NewsRemoteDataSource): NewsRepository {
-        return NewsRepositoryImpl(newsRemoteDataSource)
+    fun provideNewsRepository(
+        newsRemoteDataSource: NewsRemoteDataSource,
+        newsLocalDataSource: NewsLocalDataSource
+    ): NewsRepository {
+        return NewsRepositoryImpl(
+            newsRemoteDataSource,
+            newsLocalDataSource)
     }
 }

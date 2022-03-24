@@ -9,9 +9,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import irawan.electroshock.beritaku.data.model.APIResponse
+import irawan.electroshock.beritaku.data.model.Article
 import irawan.electroshock.beritaku.data.util.Resource
 import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
 import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
+import irawan.electroshock.beritaku.domain.usecase.SaveNewsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -19,7 +21,8 @@ import java.lang.Exception
 class NewsViewModel(
     private val app: Application,
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
-    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase,
+    private val saveNewsUseCase: SaveNewsUseCase
     ): AndroidViewModel(app) {
     val newsHeadlines : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
     val searchedNews : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
@@ -83,6 +86,10 @@ class NewsViewModel(
         } catch (e: Exception){
             searchedNews.postValue(Resource.Error("${e.message}"))
         }
+    }
+
+    fun saveArticle(article: Article) = viewModelScope.launch{
+        saveNewsUseCase.execute(article)
     }
 
 
