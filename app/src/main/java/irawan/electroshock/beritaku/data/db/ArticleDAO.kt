@@ -1,9 +1,6 @@
 package irawan.electroshock.beritaku.data.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import irawan.electroshock.beritaku.data.model.Article
 import kotlinx.coroutines.flow.Flow
 
@@ -15,4 +12,7 @@ interface ArticleDAO {
 
     @Query("SELECT * FROM table_news")
     fun getAllArticles(): Flow<List<Article>>
+
+    @Delete
+    suspend fun deleteArticle(article: Article)
 }

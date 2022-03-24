@@ -3,17 +3,15 @@ package irawan.electroshock.beritaku.presentation.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
-import irawan.electroshock.beritaku.domain.usecase.GetSavedNewsUseCase
-import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
-import irawan.electroshock.beritaku.domain.usecase.SaveNewsUseCase
+import irawan.electroshock.beritaku.domain.usecase.*
 
 class NewsViewModelFactory(
     private val app: Application,
     private val getNewsHeadlinesUseCase : GetNewsHeadlinesUseCase,
     private val getSearchedNewsUseCase : GetSearchedNewsUseCase,
     private val saveNewsUseCase : SaveNewsUseCase,
-    private val getSavedNewsUseCase : GetSavedNewsUseCase
+    private val getSavedNewsUseCase : GetSavedNewsUseCase,
+    private val deleteSavedNewsUseCase : DeleteSavedNewsUseCase
 ) :ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -22,6 +20,7 @@ class NewsViewModelFactory(
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
             saveNewsUseCase,
-            getSavedNewsUseCase) as T
+            getSavedNewsUseCase,
+            deleteSavedNewsUseCase) as T
     }
 }
