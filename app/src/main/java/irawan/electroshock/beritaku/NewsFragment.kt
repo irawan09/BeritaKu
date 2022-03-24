@@ -60,7 +60,6 @@ class NewsFragment : Fragment() {
 
     private fun viewNewsList() {
         viewModel.getNewsHeadlines(country, page)
-        Log.i(TAG, viewLifecycleOwner.lifecycle.currentState.name)
         viewModel.newsHeadlines.observe(viewLifecycleOwner, { response ->
             when(response){
                 is Resource.Success -> {
@@ -68,10 +67,10 @@ class NewsFragment : Fragment() {
                     response.data?.let {
                         Log.i(TAG, "data ${it.articles.toList().size}")
                         newsAdapter.differ.submitList(it.articles.toList())
-                        if(it.totalResults!! %20 == 0) {
-                            pages = it.totalResults / 20
+                        pages = if(it.totalResults!! %20 == 0) {
+                            it.totalResults / 20
                         } else {
-                            pages = it.totalResults/20+1
+                            it.totalResults/20+1
                         }
                         isLastPage = page == pages
                     }
@@ -153,14 +152,11 @@ class NewsFragment : Fragment() {
 
         })
 
-        fragmentNewsBinding.svNews.setOnCloseListener(object : SearchView.OnCloseListener {
-            override fun onClose(): Boolean {
-                initRecycleView()
-                viewNewsList()
-                return false
-            }
-
-        })
+        fragmentNewsBinding.svNews.setOnCloseListener {
+            initRecycleView()
+            viewNewsList()
+            false
+        }
     }
 
     fun viewSearchedNews(){
@@ -171,10 +167,10 @@ class NewsFragment : Fragment() {
                     response.data?.let {
                         Log.i(TAG, "data ${it.articles.toList().size}")
                         newsAdapter.differ.submitList(it.articles.toList())
-                        if(it.totalResults!! %20 == 0) {
-                            pages = it.totalResults / 20
+                        pages = if(it.totalResults!! %20 == 0) {
+                            it.totalResults / 20
                         } else {
-                            pages = it.totalResults/20+1
+                            it.totalResults/20+1
                         }
                         isLastPage = page == pages
                     }
