@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
+import irawan.electroshock.beritaku.domain.usecase.GetSavedNewsUseCase
 import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
 import irawan.electroshock.beritaku.domain.usecase.SaveNewsUseCase
 import irawan.electroshock.beritaku.presentation.viewmodel.NewsViewModelFactory
@@ -21,13 +22,15 @@ class FactoryModule {
         application: Application,
         getNewsHeadlinesUseCase : GetNewsHeadlinesUseCase,
         getSearchedNewsUseCase : GetSearchedNewsUseCase,
-        saveNewsUseCase : SaveNewsUseCase
+        saveNewsUseCase : SaveNewsUseCase,
+        getSavedNewsUseCase : GetSavedNewsUseCase
     ): NewsViewModelFactory {
         return NewsViewModelFactory(
             application,
             getNewsHeadlinesUseCase,
             getSearchedNewsUseCase,
-            saveNewsUseCase)
+            saveNewsUseCase,
+            getSavedNewsUseCase)
     }
 
 }

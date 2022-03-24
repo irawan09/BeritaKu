@@ -7,11 +7,13 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import irawan.electroshock.beritaku.data.model.APIResponse
 import irawan.electroshock.beritaku.data.model.Article
 import irawan.electroshock.beritaku.data.util.Resource
 import irawan.electroshock.beritaku.domain.usecase.GetNewsHeadlinesUseCase
+import irawan.electroshock.beritaku.domain.usecase.GetSavedNewsUseCase
 import irawan.electroshock.beritaku.domain.usecase.GetSearchedNewsUseCase
 import irawan.electroshock.beritaku.domain.usecase.SaveNewsUseCase
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +24,8 @@ class NewsViewModel(
     private val app: Application,
     private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
     private val getSearchedNewsUseCase: GetSearchedNewsUseCase,
-    private val saveNewsUseCase: SaveNewsUseCase
+    private val saveNewsUseCase: SaveNewsUseCase,
+    private val getSavedNewsUseCase: GetSavedNewsUseCase
     ): AndroidViewModel(app) {
     val newsHeadlines : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
     val searchedNews : MutableLiveData<Resource<APIResponse>> = MutableLiveData()
@@ -92,5 +95,9 @@ class NewsViewModel(
         saveNewsUseCase.execute(article)
     }
 
-
+    fun getSavedNews() = liveData{
+        getSavedNewsUseCase.execute().collect{
+            emit(it)
+        }
+    }
 }
